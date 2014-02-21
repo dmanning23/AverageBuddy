@@ -60,13 +60,14 @@ namespace AverageBuddy
 
 			//now to calculate the average of the history list
 			dynamic sum = ZeroValue;
+			dynamic count = History.Count;
 
 			foreach (var iter in History)
 			{
 				sum += iter;
 			}
 
-			return sum / (float)History.Count;
+			return sum / count;
 		}
 
 		#endregion //Methods
