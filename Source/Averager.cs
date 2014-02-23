@@ -17,7 +17,7 @@ namespace AverageBuddy
 		/// <summary>
 		/// this holds the history
 		/// </summary>
-		private Queue<T> History { get; set; }
+		private List<T> History { get; set; }
 
 		/// <summary>
 		/// The max smaple size we want
@@ -30,6 +30,8 @@ namespace AverageBuddy
 		/// </summary>
 		private T ZeroValue;
 
+		int _iNext = 0;
+
 		#endregion //Members
 
 		#region Methods
@@ -38,9 +40,13 @@ namespace AverageBuddy
 		//to use in the smoothing, and an exampe of a 'zero' type
 		public Averager(int SampleSize, T zeroValue)
 		{
-			History = new Queue<T>();
+			History = new List<T>();
 			MaxSize = SampleSize;
 			ZeroValue = zeroValue;
+			for (int i = 0; i < MaxSize; i++)
+			{
+				History.Add(ZeroValue);
+			}
 		}
 
 		/// <summary>
@@ -51,13 +57,12 @@ namespace AverageBuddy
 		/// <returns></returns>
 		public T Update(T MostRecentValue)
 		{
-			//add the new value to the beginning
-			History.Enqueue(MostRecentValue);
-
-			//pop enough items off to stay in the correct size
-			while (History.Count > MaxSize)
+			//add the new value to the correct index
+			History[_iNext] = MostRecentValue;
+			_iNext++;
+			if (_iNext >= MaxSize)
 			{
-				History.Dequeue();
+				_iNext = 0;
 			}
 
 			//now to calculate the average of the history list
