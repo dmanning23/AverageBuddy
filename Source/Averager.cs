@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Microsoft.CSharp;
-using System;
 
 namespace AverageBuddy
 {
