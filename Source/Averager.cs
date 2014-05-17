@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace AverageBuddy
 {
@@ -30,6 +31,8 @@ namespace AverageBuddy
 
 		int _iNext = 0;
 
+		object _lock = new object();
+
 		#endregion //Members
 
 		#region Methods
@@ -38,12 +41,17 @@ namespace AverageBuddy
 		//to use in the smoothing, and an exampe of a 'zero' type
 		public Averager(int SampleSize, T zeroValue)
 		{
-			History = new List<T>();
+			
 			MaxSize = SampleSize;
 			ZeroValue = zeroValue;
-			for (int i = 0; i < MaxSize; i++)
+
+			lock (_lock)
 			{
-				History.Add(ZeroValue);
+				History = new List<T>();
+				for (int i = 0; i < MaxSize; i++)
+				{
+					History.Add(ZeroValue);
+				}
 			}
 		}
 
@@ -66,12 +74,18 @@ namespace AverageBuddy
 		/// <param name="mostRecentValue"></param>
 		public void Add(T mostRecentValue)
 		{
+			Debug.Assert(0 <= _iNext);
+
 			//add the new value to the correct index
-			History[_iNext] = mostRecentValue;
-			_iNext++;
-			if (_iNext >= MaxSize)
+			lock (_lock)
 			{
-				_iNext = 0;
+				Debug.Assert(_iNext < History.Count);
+				History[_iNext] = mostRecentValue;
+				_iNext++;
+				if (_iNext >= MaxSize)
+				{
+					_iNext = 0;
+				}
 			}
 		}
 
@@ -83,22 +97,24 @@ namespace AverageBuddy
 		{
 			//now to calculate the average of the history list
 			dynamic sum = ZeroValue;
-			dynamic count = History.Count;
 
-			for (int i = 0; i < count; i++)
+			lock (_lock)
 			{
-				if (0 == i)
+				for (int i = 0; i < MaxSize; i++)
 				{
-					//If this is the first item, use this instead of zero.
-					sum = History[i];
-				}
-				else
-				{
-					sum += History[i];
+					if (0 == i)
+					{
+						//If this is the first item, use this instead of zero.
+						sum = History[i];
+					}
+					else
+					{
+						sum += History[i];
+					}
 				}
 			}
 
-			return sum / count;
+			return sum / MaxSize;
 		}
 
 		#endregion //Methods
