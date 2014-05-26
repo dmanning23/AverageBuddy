@@ -8,12 +8,14 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AverageBuddy.Android</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>AverageBuddy.Android</AssemblyName>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
