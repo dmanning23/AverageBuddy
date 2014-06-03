@@ -39,10 +39,9 @@ namespace AverageBuddy
 
 		//to instantiate a Smoother pass it the number of samples you want
 		//to use in the smoothing, and an exampe of a 'zero' type
-		public Averager(int SampleSize, T zeroValue)
+		public Averager(int sampleSize, T zeroValue)
 		{
-			
-			MaxSize = SampleSize;
+			MaxSize = sampleSize;
 			ZeroValue = zeroValue;
 
 			lock (_lock)
