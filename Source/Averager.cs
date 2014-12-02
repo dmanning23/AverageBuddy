@@ -9,8 +9,22 @@ namespace AverageBuddy
 	/// Example: Used to smooth frame rate calculations.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class Averager<T> where T : struct 
+	public class Averager<T> where T : struct
 	{
+		#region Fields
+
+		/// <summary>
+		/// an example of the 'zero' value of the type to be smoothed. 
+		/// This would be something like Vector2D(0,0)
+		/// </summary>
+		private T ZeroValue;
+
+		int _iNext = 0;
+
+		object _lock = new object();
+
+		#endregion //Fields
+
 		#region Members
 
 		/// <summary>
@@ -24,14 +38,16 @@ namespace AverageBuddy
 		public int MaxSize { get; set; }
 
 		/// <summary>
-		/// an example of the 'zero' value of the type to be smoothed. 
-		/// This would be something like Vector2D(0,0)
+		/// Set the size of the averager by seconds instead of sample size
+		/// Assumes you are updaintg once a frame at 60fps
 		/// </summary>
-		private T ZeroValue;
-
-		int _iNext = 0;
-
-		object _lock = new object();
+		public float MaxSeconds
+		{
+			set
+			{
+				MaxSize = ToFrames(value);
+			}
+		}
 
 		#endregion //Members
 
@@ -51,6 +67,28 @@ namespace AverageBuddy
 				{
 					History.Add(ZeroValue);
 				}
+			}
+		}
+
+		/// <summary>
+		/// average something over a period of time
+		/// </summary>
+		/// <param name="sampleSeconds"></param>
+		/// <param name="zeroValue"></param>
+		public Averager(float sampleSeconds, T zeroValue) :
+			this(ToFrames(sampleSeconds), zeroValue)
+		{
+		}
+
+		/// <summary>
+		/// When you really want the averager to return a certain value (say starting it up)
+		/// </summary>
+		/// <param name="currentValue">the value for the averager to return</param>
+		public void Set(T currentValue)
+		{
+			for (int i = 0; i < History.Count; i++)
+			{
+				History[i] = currentValue;
 			}
 		}
 
@@ -114,6 +152,12 @@ namespace AverageBuddy
 			}
 
 			return sum / MaxSize;
+		}
+
+		private static int ToFrames(float seconds)
+		{
+			seconds *= 60.0f;
+			return (int)(seconds + 0.5f);
 		}
 
 		#endregion //Methods
