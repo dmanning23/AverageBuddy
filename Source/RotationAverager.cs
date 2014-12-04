@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
+using System;
 
 namespace AverageBuddy
 {
@@ -41,14 +42,14 @@ namespace AverageBuddy
 				float prevRotation = History[NextIndex];
 
 				//get the difference between that one and this one
-				if ((prevRotation - mostRecentValue) > 180.0f)
+				if ((prevRotation - mostRecentValue) > Math.PI)
 				{
 					//put in a valid range
-					mostRecentValue += 360.0f;
+					mostRecentValue += (float)(2.0 * Math.PI);
 				}
-				else if ((prevRotation - mostRecentValue) < -180.0f)
+				else if ((prevRotation - mostRecentValue) < -Math.PI)
 				{
-					mostRecentValue -= 360.0f;
+					mostRecentValue -= (float)(2.0 * Math.PI);
 				}
 			}
 
