@@ -56,6 +56,9 @@
     <Compile Include="..\Source\Averager.cs">
       <Link>Averager.cs</Link>
     </Compile>
+    <Compile Include="..\Source\RotationAverager.cs">
+      <Link>RotationAverager.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

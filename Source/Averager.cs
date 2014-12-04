@@ -17,11 +17,11 @@ namespace AverageBuddy
 		/// an example of the 'zero' value of the type to be smoothed. 
 		/// This would be something like Vector2D(0,0)
 		/// </summary>
-		private T ZeroValue;
+		readonly private T zeroValue;
 
-		int _iNext = 0;
+		protected int NextIndex { get; set; }
 
-		object _lock = new object();
+		readonly object _lock = new object();
 
 		#endregion //Fields
 
@@ -30,7 +30,7 @@ namespace AverageBuddy
 		/// <summary>
 		/// this holds the history
 		/// </summary>
-		private List<T> History { get; set; }
+		protected List<T> History { get; set; }
 
 		/// <summary>
 		/// The max smaple size we want
@@ -55,17 +55,20 @@ namespace AverageBuddy
 
 		//to instantiate a Smoother pass it the number of samples you want
 		//to use in the smoothing, and an exampe of a 'zero' type
-		public Averager(int sampleSize, T zeroValue)
+		public Averager(int sampleSize, T zero)
 		{
+			//start the index at -1 so we can tell if this is the first entry
+			NextIndex = -1;
+
 			MaxSize = sampleSize;
-			ZeroValue = zeroValue;
+			zeroValue = zero;
 
 			lock (_lock)
 			{
 				History = new List<T>();
 				for (int i = 0; i < MaxSize; i++)
 				{
-					History.Add(ZeroValue);
+					History.Add(zeroValue);
 				}
 			}
 		}
@@ -109,20 +112,20 @@ namespace AverageBuddy
 		/// Add a new item to the list
 		/// </summary>
 		/// <param name="mostRecentValue"></param>
-		public void Add(T mostRecentValue)
+		public virtual void Add(T mostRecentValue)
 		{
-			Debug.Assert(0 <= _iNext);
-
 			//add the new value to the correct index
 			lock (_lock)
 			{
-				Debug.Assert(_iNext < History.Count);
-				History[_iNext] = mostRecentValue;
-				_iNext++;
-				if (_iNext >= MaxSize)
+				//increment first 
+				NextIndex++;
+				if (NextIndex >= MaxSize)
 				{
-					_iNext = 0;
+					NextIndex = 0;
 				}
+
+				Debug.Assert(NextIndex < History.Count);
+				History[NextIndex] = mostRecentValue;
 			}
 		}
 
@@ -133,7 +136,7 @@ namespace AverageBuddy
 		public T Average()
 		{
 			//now to calculate the average of the history list
-			dynamic sum = ZeroValue;
+			dynamic sum = zeroValue;
 
 			lock (_lock)
 			{
