@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Diagnostics;
 using System;
 
 namespace AverageBuddy
@@ -22,7 +20,6 @@ namespace AverageBuddy
 		/// average something over a period of time
 		/// </summary>
 		/// <param name="sampleSeconds"></param>
-		/// <param name="zeroValue"></param>
 		public RotationAverager(float sampleSeconds) :
 			base(sampleSeconds, 0.0f)
 		{
