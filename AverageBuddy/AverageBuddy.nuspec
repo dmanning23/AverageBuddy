@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>AverageBuddy</id>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<title>AverageBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -47,9 +47,9 @@
 		<file src="AverageBuddy.WindowsUniversal\bin\Release\AverageBuddy.WindowsUniversal.pdb" target="lib\uap10.0\AverageBuddy.WindowsUniversal.pdb" />
 		<file src="AverageBuddy.WindowsUniversal\bin\Release\AverageBuddy.WindowsUniversal.dll" target="lib\uap10.0\AverageBuddy.WindowsUniversal.dll" />
 
-		<!--DesktopGL-->
-		<file src="AverageBuddy.DesktopGL\bin\Release\AverageBuddy.DesktopGL.pdb" target="lib\net451\AverageBuddy.DesktopGL.pdb" />
-		<file src="AverageBuddy.DesktopGL\bin\Release\AverageBuddy.DesktopGL.dll" target="lib\net451\AverageBuddy.DesktopGL.dll" />
+		<!--WindowsDX-->
+		<file src="AverageBuddy.WindowsDX\bin\Release\AverageBuddy.WindowsDX.pdb" target="lib\net451\AverageBuddy.WindowsDX.pdb" />
+		<file src="AverageBuddy.WindowsDX\bin\Release\AverageBuddy.WindowsDX.dll" target="lib\net451\AverageBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
