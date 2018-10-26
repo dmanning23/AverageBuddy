@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>AverageBuddy</id>
-		<version>1.0.1</version>
+		<version>2.0</version>
 		<title>AverageBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -12,7 +12,7 @@
 		<description>This is a thing that stores a bunch of stuff and spits out an average.  Useful for something like FPS counter or whatever.</description>
 		<releaseNotes />
 		<copyright>Copyright 2016</copyright>
-		<tags>pcl, windows phone, winphone, android, ios, windows universal, monogame</tags>
+		<tags>android, ios, windows universal, monogame, xamarin</tags>
 		<dependencies>
 
 			<!--Xamarin.Android-->
@@ -25,7 +25,6 @@
 
 			<!--Win Universal-->
 			<group targetFramework="uap10.0">
-				<dependency id="MonoGame.Framework.WindowsUniversal" version="3.5"/>
 			</group>
 
 			<group targetFramework="net451">
