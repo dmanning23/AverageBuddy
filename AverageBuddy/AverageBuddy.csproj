@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>AverageBuddy</PackageId>
+    <Version>5.0.0</Version>
+    <Title>AverageBuddy</Title>
+    <Authors>dmanning23</Authors>
+    <description>This is a thing that stores a bunch of stuff and spits out an average.  Useful for something like FPS counter or whatever.</description>
+    <PackageProjectUrl>https://github.com/dmanning23/AverageBuddy</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/dmanning23/AverageBuddy</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>monogame</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
